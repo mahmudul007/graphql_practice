@@ -1,6 +1,13 @@
+require("./db/db");
 const { ApolloServer } = require('@apollo/server');
 const { startStandaloneServer } = require('@apollo/server/standalone');
-async function  server()   {
+const {expressMiddleware} = require('@apollo/server/express4')
+const  express = require('express');
+const app = express();
+const cors = require('cors');
+const { resolvers } = require('./graphql/resolvers/resolvers');
+const { typeDefs } = require('./graphql/typeDefs/schema');
+async function  startServer()   {
     const books = [
         {
           title: 'The Awakening',
@@ -16,36 +23,18 @@ async function  server()   {
           },
         },
       ];
-    const typeDefs = `#graphql
-    
-      type Book {
-        title: String
-        author: Author
-
-      }
-      type Author {
-        name: String
-        books: [Book]
-      }
     
     
-      type Query {
-        books: [Book]
-      }
-    `;
-    const resolvers = {
-        Author: {
-            books: () => books,
-            },
-        Query: {
-          books: () => books,
-        },
-      };
     const server = new ApolloServer({ typeDefs, resolvers });
-    const { url } = await startStandaloneServer(server, {
-      listen: { port: 4000 },
+    await server.start();
+    app.use(cors());
+    app.use(express.json());
+    app.use(`/graphql`,expressMiddleware(server))
+
+    app.listen(4000, () => {
+      console.log(`🚀 Server ready at 4000`);
     });
-    console.log(`🚀 Server ready at ${url}`);
+    
     
 }
-server();
+startServer();

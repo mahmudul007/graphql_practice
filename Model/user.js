@@ -8,6 +8,9 @@ const useSchema = new mongoose.Schema({
     },
     email:{
         type: String,
+        unique: true,
+        lowercase: true,
+        trim : true,
         required: true,
         min: 6,
         max: 255
@@ -15,8 +18,12 @@ const useSchema = new mongoose.Schema({
     password:{
         type:String,
         required: true,
-        min: 6,
-        max: 1024
+        trim : true,
+        min: [6, 'Password must be at least 6 characters long.'],
+        
+        
+        
+       
     },
     date:{
         type: Date,

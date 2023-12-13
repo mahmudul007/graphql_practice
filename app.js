@@ -7,6 +7,8 @@ const app = express();
 const cors = require('cors');
 const { resolvers } = require('./graphql/resolvers/resolvers');
 const { typeDefs } = require('./graphql/typeDefs/schema');
+const jwt = require('jsonwebtoken');
+const { userAuth } = require('./middleware/authMiddleware');
 async function  startServer()   {
     const books = [
         {
@@ -29,7 +31,23 @@ async function  startServer()   {
     await server.start();
     app.use(cors());
     app.use(express.json());
-    app.use(`/graphql`,expressMiddleware(server))
+    app.use(
+      '/graphql',
+      expressMiddleware(server
+        ,
+         {
+        context: async ({ req }) => {
+          const token = req.headers.authorization || '';
+          const userTokenVerify = jwt.verify(token, 'somesupersecretkey');
+          const user = await userAuth(userTokenVerify) ;
+          return { user };
+          // console.log(userTokenVerify);
+          // return null;
+        },
+      }
+      )
+    );
+    
 
     app.listen(4000, () => {
       console.log(`🚀 Server ready at 4000`);

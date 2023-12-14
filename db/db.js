@@ -1,10 +1,19 @@
-const mongoose = require("mongoose");
-const { mongo_uri } = require("../config/config");
+import mongoose from "mongoose";
+import mongo_uri from "../config/config.js";
 
 
-mongoose
-  .connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("DB Connected!"))
-  .catch((err) => {
-    console.log(Error, err.message);
-  });
+const connectDB = async () => {
+  try {
+    await mongoose.connect(mongo_uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB Connected");
+  } catch (error) {
+    console.log(error);
+  }
+}
+connectDB()
+
+
+export default connectDB;

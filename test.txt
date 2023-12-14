@@ -64,4 +64,15 @@ app.patch("/update/user/:id", async (req, res) => {
 app.listen(3000, () => console.log("Server running"));
 
     const tokenCompare =  jwt.verify(token ,"somesupersecretkey" )
+     // ,
+      //    {
+      //   context: async ({ req }) => {
+      //     const token = req.headers.authorization || '';
+      //     const userTokenVerify = jwt.verify(token, 'somesupersecretkey');
+      //     const user = await userAuth(userTokenVerify) ;
+      //     return { user };
+      //     // console.log(userTokenVerify);
+      //     // return null;
+      //   },
+      // }
 

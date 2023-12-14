@@ -7,13 +7,7 @@ const useSchema = new mongoose.Schema({
     max: 255
 
    },
-   description:{
-    type: String,
-    required: true,
-    min: 6,
-    max: 255
 
-   },
    is_complete:{
     type : Boolean,
     default: false

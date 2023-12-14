@@ -9,6 +9,11 @@ exports.typeDefs = `#graphql
         name: String
         books: [Book]
       }
+      type Todo {
+        id: ID!
+        title: String!
+        is_complete: Boolean
+      }
     
     
       type Query {
@@ -16,6 +21,8 @@ exports.typeDefs = `#graphql
         users:[User]
         user:User
         login(email:String,password:String,token:String):User
+        todos:[Todo]
+        todo (id:ID!):Todo
 
       }
 
@@ -42,6 +49,18 @@ exports.typeDefs = `#graphql
         createUser(name:String,email:String,password:String):Message
         updateUser(id:ID!name:String,email:String,password:String):User
         deleteUser(id:ID!):Message
+        createTodo(
+          title: String!
+          is_complete: Boolean
+        ): Todo
+        updateTodo(
+          id: ID!        
+          title: String
+          is_complete: Boolean
+        ): Todo
+        deleteTodo(
+          id: ID!
+        ): Todo
       
       }
     `;

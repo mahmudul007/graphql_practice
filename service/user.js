@@ -1,6 +1,6 @@
-const User = require("../Model/user");
-var bcrypt = require("bcryptjs");
-var jwt = require('jsonwebtoken');
+import User from "../Model/user.js";
+import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
 
 const generateToken = (user) => {
   try {

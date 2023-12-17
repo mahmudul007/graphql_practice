@@ -1,4 +1,4 @@
-const Todo = require("../Model/todo");
+import Todo from "../Model/todo.js"
 
 const createTodo = async (title) => {
   try {
@@ -70,10 +70,5 @@ const deleteTodo = async (id) => {
     }
 
 }
-module.exports = {
-  createTodo,
-    getTodo,
-    updateTodo,
-    getSingleTodo,
-    deleteTodo
-};
+
+export default {createTodo,getTodo,updateTodo,getSingleTodo,deleteTodo}

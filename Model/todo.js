@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const useSchema = new mongoose.Schema({
    title :{
     type: String,
@@ -19,4 +19,4 @@ const useSchema = new mongoose.Schema({
     timestamps: true,
 }
 );
-module.exports = mongoose.model('Todo', useSchema);
+export default mongoose.model('Todo', useSchema);

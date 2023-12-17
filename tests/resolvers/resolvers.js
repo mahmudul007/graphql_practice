@@ -9,6 +9,7 @@ const{ getTodo} = require("../../service/todo");
 const {updateTodo} = require("../../service/todo");
 const {getSingleTodo} = require("../../service/todo");
 const {deleteTodo} = require("../../service/todo");
+//test
 
 exports.resolvers = {
     Author: {
@@ -20,7 +21,7 @@ exports.resolvers = {
       todo: (parent,{id})=>getSingleTodo (id),
       books: () => books,
       users: (_,__,context) => getUser(),
-      user: (parent,_,context)=> {
+      user: (_,_,context)=> {
         // console.log(context.user.email)
         return getUserById(context.user.id)
       },

@@ -1,4 +1,7 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
-exports.mongo_uri=process.env.MONGO_URI
+const  mongo_uri = process.env.MONGO_URI
+
+export default mongo_uri
 
